@@ -2,7 +2,7 @@ package pl.patrykkawula.library.model;
 
 import java.io.Serializable;
 
-public abstract class Publication implements Serializable {
+public abstract class Publication implements Serializable, Comparable<Publication> {
     private int year;
     private String title;
     private String publisher;
@@ -13,27 +13,27 @@ public abstract class Publication implements Serializable {
         this.publisher = publisher;
     }
 
-    int getYear() {
+    public int getYear() {
         return year;
     }
 
-    void setYear(int year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    String getPublisher() {
+    public String getPublisher() {
         return publisher;
     }
 
-    void setPublisher(String publisher) {
+    public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
 
@@ -63,4 +63,9 @@ public abstract class Publication implements Serializable {
     }
 
     public abstract String toCsv();
+
+    @Override
+    public int compareTo(Publication p) {
+        return title.compareToIgnoreCase(p.getTitle());
+    }
 }

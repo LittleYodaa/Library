@@ -2,7 +2,7 @@ package pl.patrykkawula.library.model;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable {
+public abstract class User implements csvConvertible {
     private String firstName;
     private String lastName;
     private String pesel;

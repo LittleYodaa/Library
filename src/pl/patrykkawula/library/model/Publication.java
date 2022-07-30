@@ -2,7 +2,7 @@ package pl.patrykkawula.library.model;
 
 import java.io.Serializable;
 
-public abstract class Publication implements Serializable, Comparable<Publication> {
+public abstract class Publication implements Serializable, Comparable<Publication>, csvConvertible {
     private int year;
     private String title;
     private String publisher;

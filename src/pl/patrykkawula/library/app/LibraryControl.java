@@ -6,7 +6,6 @@ import pl.patrykkawula.library.io.DataReader;
 import pl.patrykkawula.library.io.file.FileManager;
 import pl.patrykkawula.library.io.file.FileManagerBuilder;
 import pl.patrykkawula.library.model.*;
-import pl.patrykkawula.library.model.comparator.AlphabeticalTitleComparator;
 
 import java.util.Comparator;
 import java.util.InputMismatchException;

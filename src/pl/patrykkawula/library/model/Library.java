@@ -4,9 +4,7 @@ import pl.patrykkawula.library.exception.PublicationAlreadyExistException;
 import pl.patrykkawula.library.exception.UserAlreadyExistException;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Library implements Serializable {
 
@@ -19,6 +17,18 @@ public class Library implements Serializable {
 
     public Map<String, Publication> getPublications() {
         return publications;
+    }
+
+    public Collection<Publication> getSortedPublilcations(Comparator<Publication> comparator) {
+        List<Publication> list = new ArrayList<>(publications.values());
+        list.sort(comparator);
+        return list;
+    }
+
+    public Collection<LibraryUser> getSortedUsers (Comparator<LibraryUser> comparator) {
+        List<LibraryUser> list = new ArrayList<>(users.values());
+        list.sort(comparator);
+        return list;
     }
 
     public void addUser(LibraryUser user) {

@@ -59,25 +59,29 @@ public class CsvFileManager implements FileManager {
     }
 
     private void importPublications(Library library) {
-        try (Scanner fileReader = new Scanner(new File(FILE_NAME))) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                Publication publication = createObjectFromString(line);
-                library.addPublication(publication);
-            }
-        } catch (FileNotFoundException e) {
+        try (BufferedReader bufferedReader =new BufferedReader(new FileReader(FILE_NAME))) {
+//            while (fileReader.hasNextLine()) {
+//                String line = fileReader.nextLine();
+//                Publication publication = createObjectFromString(line);
+//                library.addPublication(publication);
+                bufferedReader.lines()
+                        .map(this::createObjectFromString)
+                        .forEach(library::addPublication);
+        } catch (IOException e) {
             throw new DataImportException("Brak pliku " + FILE_NAME);
         }
     }
 
     private void importUsers(Library library) {
-        try (Scanner fileReader = new Scanner(new File(USER_FILE_NAME))) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                LibraryUser libUser = createUserFromString(line);
-                library.addUser(libUser);
-            }
-        } catch (FileNotFoundException e) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(USER_FILE_NAME))) {
+//            while (fileReader.hasNextLine()) {
+//                String line = fileReader.nextLine();
+//                LibraryUser libUser = createUserFromString(line);
+//                library.addUser(libUser);
+            bufferedReader.lines()
+                    .map(this::createUserFromString)
+                    .forEach(library::addUser);
+        } catch (IOException e) {
             throw new DataImportException("Brak pliku " + USER_FILE_NAME);
         }
     }

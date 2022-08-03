@@ -5,11 +5,10 @@ import pl.patrykkawula.library.io.ConsolePrinter;
 import pl.patrykkawula.library.io.DataReader;
 import pl.patrykkawula.library.io.file.FileManager;
 import pl.patrykkawula.library.io.file.FileManagerBuilder;
-import pl.patrykkawula.library.model.Book;
-import pl.patrykkawula.library.model.Library;
-import pl.patrykkawula.library.model.LibraryUser;
-import pl.patrykkawula.library.model.Magazine;
+import pl.patrykkawula.library.model.*;
+import pl.patrykkawula.library.model.comparator.AlphabeticalTitleComparator;
 
+import java.util.Comparator;
 import java.util.InputMismatchException;
 
 public class LibraryControl {
@@ -130,15 +129,24 @@ public class LibraryControl {
     }
 
     private void printBooks() {
-        printer.printBooks(library.getPublications().values());
+        printer.printBooks(library.getSortedPublilcations(
+//                (p1, p2) -> p1.getTitle().compareToIgnoreCase(p2.getTitle())
+                Comparator.comparing(Publication::getTitle, String.CASE_INSENSITIVE_ORDER)
+        ));
     }
 
     private void printMagazines() {
-        printer.printMagazines(library.getPublications().values());
+        printer.printMagazines(library.getSortedPublilcations(
+//                (p1, p2) -> p1.getTitle().compareToIgnoreCase(p2.getTitle())
+                Comparator.comparing(Publication::getTitle, String.CASE_INSENSITIVE_ORDER)
+        ));
     }
 
     private void printUser() {
-        printer.printUsers(library.getUsers().values());
+        printer.printUsers(library.getSortedUsers(
+//                (p1, p2) -> p1.getLastName().compareToIgnoreCase(p2.getLastName())
+                Comparator.comparing(User::getLastName, String.CASE_INSENSITIVE_ORDER)
+        ));
     }
 
     private void deleteMagazine() {
